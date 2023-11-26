@@ -52,7 +52,7 @@ public class Drunkard {
         addCardToPlayers();
         int move = 1, numberOfEquals = 1;
         Card getCardPlayerOne, getCardPlayerTwo;
-        while (0 < 1) {
+        while (true) {
             if (cardsPlayerOne.size() < numberOfEquals) {
                 getCardPlayerOne = cardsPlayerOne.get(cardsPlayerOne.size() - 1);
                 getCardPlayerTwo = cardsPlayerTwo.get(cardsPlayerTwo.size() - numberOfEquals);
@@ -65,34 +65,26 @@ public class Drunkard {
             }
             Integer gameCardPlayerOne = getCardPlayerOne.getNominate();
             Integer gameCardPlayerTwo = getCardPlayerTwo.getNominate();
-            String gameCardPlayerOneString = getCardPlayerOne.getDescriptionNominate() + " " + getCardPlayerOne.getDescriptionSuits();
-            String gameCardPlayerTwoString = getCardPlayerTwo.getDescriptionNominate() + " " + getCardPlayerTwo.getDescriptionSuits();
             System.out.println();
             System.out.println("Ход " + move++);
 
             int result = gameCardPlayerOne.compareTo(gameCardPlayerTwo);
             if (result == 0) {
-                System.out.println(gameCardPlayerOneString + " = " + gameCardPlayerTwoString);
+                System.out.println(getCardPlayerOne + " = " + getCardPlayerTwo);
                 System.out.println("Карты равны");
                 numberOfEquals++;
             }
-            if (result == 1) {
-                System.out.println(gameCardPlayerOneString + " > " + gameCardPlayerTwoString);
-                for (int i = 1; i <= numberOfEquals; i++) {
-                    gamerWin(cardsPlayerOne, cardsPlayerTwo, i);
-                }
-                System.out.println("Игрок один победил");
+            if (result > 0) {
+                System.out.println(getCardPlayerOne + " > " + getCardPlayerTwo);
+                checkWhoWin(numberOfEquals, result, cardsPlayerOne, cardsPlayerTwo);
                 numberOfEquals = 1;
                 if (cardsPlayerOne.size() == 0 || cardsPlayerTwo.size() == 0) {
                     break;
                 }
             }
-            if (result == -1) {
-                System.out.println(gameCardPlayerOneString + " < " + gameCardPlayerTwoString);
-                for (int i = 1; i <= numberOfEquals; i++) {
-                    gamerWin(cardsPlayerTwo, cardsPlayerOne, i);
-                }
-                System.out.println("Игрок два победил");
+            if (result < 0) {
+                System.out.println(getCardPlayerOne + " < " + getCardPlayerTwo);
+                checkWhoWin(numberOfEquals, result, cardsPlayerOne, cardsPlayerTwo);
                 numberOfEquals = 1;
                 if (cardsPlayerOne.size() == 0 || cardsPlayerTwo.size() == 0) {
                     break;
@@ -101,5 +93,22 @@ public class Drunkard {
         }
         System.out.println("Игра завершена");
     }
+
+    public void checkWhoWin(int numberOfEquals, int result, ArrayList<Card> cardsPlayerOne, ArrayList<Card> cardsPlayerTwo) {
+        if (result > 0) {
+            for (int i = 1; i <= numberOfEquals; i++) {
+                gamerWin(cardsPlayerOne, cardsPlayerTwo, i);
+            }
+            System.out.println("Игрок один победил");
+        }
+        if (result < 0) {
+            for (int i = 1; i <= numberOfEquals; i++) {
+                gamerWin(cardsPlayerTwo, cardsPlayerOne, i);
+            }
+            System.out.println("Игрок два победил");
+        }
+    }
 }
+
+
 
