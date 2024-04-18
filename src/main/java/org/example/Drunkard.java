@@ -20,7 +20,12 @@ public class Drunkard {
             if (countSuits == 4) {
                 countSuits = 0;
             }
-            cardDeck.add(new Card(countNominate, cardNominate.get(countNominate), cardSuits.get(countSuits)));
+            Card card = Card.builder()
+                    .nominate(countNominate)
+                    .descriptionNominate(cardNominate.get(countNominate))
+                    .descriptionSuits(cardSuits.get(countSuits))
+                    .build();
+            cardDeck.add(card);
             countNominate++;
             countSuits++;
         }
@@ -102,4 +107,3 @@ public class Drunkard {
         System.out.println("Игра завершена");
     }
 }
-

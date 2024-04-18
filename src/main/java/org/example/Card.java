@@ -1,16 +1,22 @@
 package org.example;
 
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@Builder
 public class Card {
     private int nominate;
     private String descriptionNominate;
     private String descriptionSuits;
-
+/*
     public Card(int nominate, String descriptionNominate, String descriptionSuits) {
         this.nominate = nominate;
         this.descriptionNominate = descriptionNominate;
         this.descriptionSuits = descriptionSuits;
     }
-
+/*
     public int getNominate() {
         return nominate;
     }
@@ -35,6 +41,10 @@ public class Card {
         this.descriptionSuits = descriptionSuits;
     }
 
+
+
+ */
+
     @Override
     public String toString() {
         return "Card{" +
@@ -43,4 +53,5 @@ public class Card {
                 ", descriptionSuits='" + descriptionSuits + '\'' +
                 '}';
     }
+
 }
